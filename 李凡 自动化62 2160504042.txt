@@ -1,0 +1,112 @@
+              1.2
+	I = imread('lena.bmp'); 
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(2));
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(128));
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(64)); 
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(32));
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(16));
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(8));
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(4));
+	figure;clims = [0 255];imagesc(I,clims);colormap(gray(2));
+	1.3 
+	
+	clear;clc; 
+	lena = imread('lenabro.bmp'); %处理lena的副本lenabro 
+	mean = mean2(lena) %求均值 
+	square = std2(lena) %求方差 
+	
+	1.4 
+	
+	I = imread('lena.bmp'); 
+                I1 = imresize(I,[2048,2048],'nearest'); 
+                I2 = imresize(I,[2048,2048],'bilinear'); 
+                I3 = imresize(I,[2048,2048],'bicubic'); 
+                subplot(221),imshow(I),title('原始图像'); 
+                subplot(222),imshow(I1),title('最邻近插值法'); 
+                subplot(223),imshow(I2),title('双线性插值法'); 
+                subplot(224),imshow(I3),title('双三次插值法'); 
+	
+	1.5 
+	
+	clear;clc; 
+	lena = imread('lenabro.bmp'); %处理lena的副本lenabro 
+	% lena rotate操作 
+	lenaRotate = imrotate(lena,30); %旋转之后会有四个黑角，总图像为700×700 
+	figure(1) 
+	subplot(1,4,1) 
+	imshow(lenaRotate) 
+	title('0 lena after rotate 30°') 
+	ZoomNearest = imresize(lenaRotate,[2048,2048],'nearest'); 
+	ZoomBilinear = imresize(lenaRotate,[2048,2048],'bilinear'); 
+	ZoomBicubic = imresize(lenaRotate,[2048,2048],'bicubic'); 
+	subplot(1,4,2) 
+	imshow(ZoomNearest) 
+	title('1 lena rotate and ZoomNearest') 
+	subplot(1,4,3) 
+	imshow(ZoomBilinear) 
+	title('2 lena rotate and ZoomBilinear') 
+	subplot(1,4,4) 
+	imshow(ZoomBicubic) 
+	title('3 lena rotate and ZoomBicubic') 
+	
+	% lena shear 操作 
+	T = [1 0 0;1 1 0;0 0 1]; %变换矩阵 
+	tform = affine2d(T); 
+	LenaShear = imwarp(lena,tform); 
+	figure(2) 
+	subplot(1,4,1) 
+	imshow(LenaShear) 
+	title('0 lena after shear 1') 
+	ZoomNearest = imresize(LenaShear,[2048,2048],'nearest'); 
+	ZoomBilinear = imresize(LenaShear,[2048,2048],'bilinear'); 
+	ZoomBicubic = imresize(LenaShear,[2048,2048],'bicubic'); 
+	subplot(1,4,2) 
+	imshow(ZoomNearest) 
+	title('1 lena shear and ZoomNearest') 
+	subplot(1,4,3) 
+	imshow(ZoomBilinear) 
+	title('2 lena shear and ZoomBilinear') 
+	subplot(1,4,4) 
+	imshow(ZoomBicubic) 
+	title('3 lena shear and ZoomBicubic') 
+	
+	% elain rotate 操作 
+	elain = imread('elain1bro.bmp'); %处理elain1的副本elain1bro 
+	elainRotate = imrotate(elain,30); %旋转之后会有四个黑角，总图像为700×700 
+	figure(3) 
+	subplot(1,4,1) 
+	imshow(elainRotate) 
+	title('0 elain after rotate 30°') 
+	ZoomNearest = imresize(elainRotate,[2048,2048],'nearest'); 
+	ZoomBilinear = imresize(elainRotate,[2048,2048],'bilinear'); 
+	ZoomBicubic = imresize(elainRotate,[2048,2048],'bicubic'); 
+	subplot(1,4,2) 
+	imshow(ZoomNearest) 
+	title('1 elain rotate and ZoomNearest') 
+	subplot(1,4,3) 
+	imshow(ZoomBilinear) 
+	title('2 elain rotate and ZoomBilinear') 
+	subplot(1,4,4) 
+	imshow(ZoomBicubic) 
+	title('3 elain rotate and ZoomBicubic') 
+	
+	% elain shear 操作 
+	T = [1 0 0;1 1 0;0 0 1]; %变换矩阵 
+	tform = affine2d(T); 
+	elainShear = imwarp(elain,tform); 
+	figure(4) 
+	subplot(1,4,1) 
+	imshow(elainShear) 
+	title('0 elain after shear 1') 
+	ZoomNearest = imresize(elainShear,[2048,2048],'nearest'); 
+	ZoomBilinear = imresize(elainShear,[2048,2048],'bilinear'); 
+	ZoomBicubic = imresize(elainShear,[2048,2048],'bicubic'); 
+	subplot(1,4,2) 
+	imshow(ZoomNearest) 
+	title('1 elain shear and ZoomNearest') 
+	subplot(1,4,3) 
+	imshow(ZoomBilinear) 
+	title('2 elain shear and ZoomBilinear') 
+	subplot(1,4,4) 
+	imshow(ZoomBicubic) 
+	title('3 elain shear and ZoomBicubic')
